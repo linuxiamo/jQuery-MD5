@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MD5 test</title>
+
+    <!-- Jquery minified -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="jquery.md5.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+
+</head>
+<body>
+    
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Calcolo dell'MD5</h1>
+                
+                <div class="form-group">
+                  <label for=""></label>
+                  <small id="helpId" class="form-text text-muted">Inserisci qui la stringa da trasformare:</small>
+                  <input type="text"
+                      class="form-control form-control-lg" name="stringa" id="stringa" aria-describedby="helpId" placeholder="Testo">
+                </div>
+
+                <button id="btnRecupera" class="btn btn-primary">Calcola MD5</button>
+                
+                <h2>Risultato calcolo</h2>
+                <p>Valore di riferimento:</p>
+                <code>
+                    60367753f278fddf458397dbaf63cad0
+                </code>
+                <br>
+                <code id="result">
+                    Risultato
+                </code>
+                <br>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+
+        jQuery(document).ready(function(){
+            // qui va il codice da eseguire
+
+            var stringa = "";
+
+            $("#btnRecupera").click(function(){
+                
+                stringa = $("#stringa").val();
+                
+                // Create (hex-encoded) MD5 hash of a given string value:
+                var md5 = $.md5(stringa);
+                console.log(md5);
+                $("#result").html(md5 + "<br>");
+                
+                // Create (hex-encoded) HMAC-MD5 hash of a given string value and key:
+                var md5 = $.md5(stringa, 'key');
+                console.log(md5);
+                $("#result").html($("#result").html() + md5 + "<br>");
+                
+                //Create raw MD5 hash of a given string value:
+                var md5 = $.md5(stringa, null, true);
+                console.log(md5);
+                $("#result").html($("#result").html() + md5 + "<br>");
+
+                // Create raw HMAC-MD5 hash of a given string value and key:
+                var md5 = $.md5(stringa, 'key', true);
+                console.log(md5);
+                $("#result").html($("#result").html() + md5 + "<br>");
+                
+            });
+        
+        });
+
+    </script>
+</body>
+</html>
